@@ -1,60 +1,111 @@
-import { Button, Checkbox, Form, FormInstance, Input } from 'antd';
-import React, { Component, createRef, RefObject } from 'react';
-class Login extends Component {
-  fromRef: RefObject<FormInstance>;
-  constructor(props: any) {
-    super(props);
+import React, { useEffect, FC } from 'react'
+import { useHistory } from 'react-router-dom'
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { Form, Input, Button, message } from 'antd'
+import '@/assets/css/login.less'
+// import Logo from '@/assets/img/logo.png'
+import { setUserInfo } from '@/assets/js/publicFunc'
+import { connect } from 'react-redux'
+import * as actions from './../store/actions'
 
-    this.fromRef = createRef<FormInstance>();
+interface Props extends ReduxProps {}
+
+const LoginForm: FC<Props> = ({
+  storeData: { theme, userInfo = {} },
+  setStoreData
+}) => {
+  const history = useHistory()
+  useEffect(() => {
+    const { token } = userInfo
+    if (token) {
+      history.push('/')
+      return
+    }
+    // 重置 tab栏为首页
+    setStoreData('SET_CURTAB', ['/'])
+  }, [history, setStoreData, userInfo])
+  // 触发登录方法
+  const onFinish = (values: CommonObjectType<string>): void => {
+    const { userName, password } = values
+    // if (userName !== 'admin' && password !== '123456') {
+    //   message.error('用户名或密码错误')
+    //   return
+    // }
+
+    // 登录后返回的数据，包括权限
+    const res = {
+      userName,
+      token: 'asdfghjkl',
+      permission: [
+        {
+          code: 'user:list:view',
+          name: '查看用户列表'
+        },
+        {
+          code: 'user:list:add',
+          name: '新增用户列表'
+        },
+        {
+          code: 'user:list:edit',
+          name: '编辑用户列表'
+        },
+        {
+          code: 'role:list:view',
+          name: '查看角色列表'
+        },
+        {
+          code: 'auth:test:view',
+          name: '查看权限测试页'
+        }
+      ]
+    }
+    setUserInfo(res, setStoreData)
+    history.push('/')
   }
-  render() {
-    return (
-      <>
-        <Form
-          name="normal_login"
-          ref={this.fromRef}
-          initialValues={{ remember: true }}>
-          <Form.Item
-            name="username"
-            rules={[
-              { required: true, message: 'Please input your Username!' }
-            ]}>
-            <Input
-              placeholder="Username"
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[
-              { required: true, message: 'Please input your Password!' }
-            ]}>
-            <Input
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Item>
-          <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
 
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
-          </Form.Item>
+  const FormView = (
+    <Form className="login-form" name="login-form" onFinish={onFinish}>
+      <Form.Item
+        name="userName"
+        rules={[{ required: true, message: '请输入用户名' }]}
+      >
+        <Input placeholder="用户名" prefix={<UserOutlined />} size="large" />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[{ required: true, message: '请输入密码' }]}
+        extra="用户名：admin 密码：123456"
+      >
+        <Input.Password
+          placeholder="密码"
+          prefix={<LockOutlined />}
+          size="large"
+        />
+      </Form.Item>
+      <Form.Item>
+        <Button
+          className="login-form-button"
+          htmlType="submit"
+          size="large"
+          type="primary"
+        >
+          登录
+        </Button>
+      </Form.Item>
+    </Form>
+  )
 
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button">
-              Log in
-            </Button>
-            Or <a href="">register now!</a>
-          </Form.Item>
-        </Form>
-      </>
-    );
-  }
+  return (
+    <div className="login-layout" id="login-layout">
+      <div className="logo-box">
+        <span className="logo-name">React-Antd Multi-Tab</span>
+      </div>
+      {FormView}
+    </div>
+  )
 }
-export default Login;
+
+export default connect(
+  (state) => state,
+  actions
+)(LoginForm)
