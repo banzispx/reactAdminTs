@@ -1,0 +1,64 @@
+{
+  "user": [
+    {
+      "safeobjId": "dasdas",
+      "safeobjStatus": -1,
+      "safeobjType": 1,
+      "description": "asdas",
+      "id": 11
+    },
+    {
+      "safeobjId": "qweqw",
+      "safeobjStatus": -1,
+      "safeobjType": 1,
+      "description": "qwe",
+      "id": 12
+    },
+    {
+      "safeobjId": "adsdas",
+      "safeobjStatus": -1,
+      "safeobjType": 1,
+      "description": "sadas",
+      "id": 13
+    },
+    {
+      "safeobjId": "asdas",
+      "safeobjStatus": -1,
+      "safeobjType": 1,
+      "description": "sadasd",
+      "id": 14
+    },
+    {
+      "safeobjId": "das",
+      "safeobjStatus": -1,
+      "safeobjType": 1,
+      "description": "sadas",
+      "id": 15
+    },
+    {
+      "safeobjId": "sad",
+      "safeobjStatus": 0,
+      "safeobjType": 1,
+      "description": "dasdas",
+      "id": 16
+    },
+    {
+      "safeobjId": "waeq",
+      "safeobjStatus": -1,
+      "safeobjType": 1,
+      "id": 17
+    },
+    {
+      "safeobjId": "qweqweqw",
+      "safeobjStatus": -1,
+      "safeobjType": 1,
+      "id": 18
+    },
+    {
+      "safeobjId": "wqeqwe",
+      "safeobjStatus": -1,
+      "safeobjType": 1,
+      "id": 19
+    }
+  ]
+}

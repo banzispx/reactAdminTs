@@ -165,6 +165,8 @@ const MyTable: FC<TableProps> = forwardRef(
       filters: CommonObjectType,
       sorter: object
     ): void => {
+      console.log(sorter, pagination, filters, 12);
+      
       // 如果有sort排序并且sort参数改变时，优先排序
       const sortObj = sortConfig ? sortConfig(sorter) : {}
       setSortParams(sortObj)
@@ -179,7 +181,7 @@ const MyTable: FC<TableProps> = forwardRef(
         pageNum,
         pageSize
       })
-    }
+    }    
 
     /**
      * @useImperativeHandle

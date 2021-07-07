@@ -5,7 +5,13 @@ import MyTable from '@/components/common/table'
 import { isAuthorized, previewImg } from '@/assets/js/publicFunc'
 import MySelect from '@/components/common/mySelect'
 import commom from '@/api'
-
+import {
+  HomeOutlined,
+  SettingFilled,
+  SmileOutlined,
+  SyncOutlined,
+  LoadingOutlined,
+} from '@ant-design/icons';
 const UserList: FC = () => {
   const tableRef: RefType = useRef()
   const history = useHistory()
@@ -26,8 +32,8 @@ const UserList: FC = () => {
     </Button>
   )
 
-  const onSelectRow = (rowKeys: string[]) => {
-    console.log('rowKeys: ', rowKeys)
+  const onSelectRow = (rowKeys: string[], selectedRows: any[]) => {
+    console.log('rowKeys: ', rowKeys,selectedRows)
   }
 
   // 搜索栏配置项
@@ -95,6 +101,12 @@ const UserList: FC = () => {
   ]
   return (
     <>
+      <HomeOutlined />
+      <SettingFilled />
+      <SmileOutlined />
+      <SyncOutlined spin />
+      <SmileOutlined rotate={180} />
+      <LoadingOutlined />
       {isAuthorized('user:list:add') && <AddBtn />}
       <MyTable
         apiFun={commom.getList}

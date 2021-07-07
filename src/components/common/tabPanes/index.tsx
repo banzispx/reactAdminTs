@@ -280,7 +280,6 @@ const TabPanes: FC<Props> = (props) => {
         onTabClick={onTabClick}
         type="editable-card"
       >
-        {console.log('panes', panes, reloadPath)}
         
         {panes.map((pane: CommonObjectType) => (
           <TabPane
